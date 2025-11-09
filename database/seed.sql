@@ -82,11 +82,11 @@ INSERT INTO ac_users (nom, prenom, email, password, role, quartier_id, is_active
 -- Password pour tous : User@2024
 -- Hash : $2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
 INSERT INTO ac_users (nom, prenom, email, password, role, quartier_id, is_active) VALUES
-('Rakoto', 'Jean', 'jean.rakoto@gmail.com', '$2y$10$96ddN6BFFGsPFl1PguQeIOhid4Nzfmqig2L0v41IoANLcjT.NcOE.', 'user', 1, TRUE),
-('Rasoa', 'Marie', 'marie.rasoa@gmail.com', '$2y$10$96ddN6BFFGsPFl1PguQeIOhid4Nzfmqig2L0v41IoANLcjT.NcOE.', 'user', 2, TRUE),
-('Randria', 'Paul', 'paul.randria@gmail.com', '$2y$10$96ddN6BFFGsPFl1PguQeIOhid4Nzfmqig2L0v41IoANLcjT.NcOE.', 'user', 5, TRUE),
-('Raharison', 'Sophie', 'sophie.raharison@gmail.com', '$2y$10$96ddN6BFFGsPFl1PguQeIOhid4Nzfmqig2L0v41IoANLcjT.NcOE.', 'user', 9, TRUE),
-('Ravelo', 'Marc', 'marc.ravelo@gmail.com', '$2y$10$96ddN6BFFGsPFl1PguQeIOhid4Nzfmqig2L0v41IoANLcjT.NcOE.', 'user', 12, TRUE);
+('RAKOTO', 'Jean', 'jean.rakoto@gmail.com', '$2y$10$96ddN6BFFGsPFl1PguQeIOhid4Nzfmqig2L0v41IoANLcjT.NcOE.', 'user', 1, TRUE),
+('RASOA', 'Marie', 'marie.rasoa@gmail.com', '$2y$10$96ddN6BFFGsPFl1PguQeIOhid4Nzfmqig2L0v41IoANLcjT.NcOE.', 'user', 2, TRUE),
+('RANDRIA', 'Paul', 'paul.randria@gmail.com', '$2y$10$96ddN6BFFGsPFl1PguQeIOhid4Nzfmqig2L0v41IoANLcjT.NcOE.', 'user', 5, TRUE),
+('RAHARISON', 'Sophie', 'sophie.raharison@gmail.com', '$2y$10$96ddN6BFFGsPFl1PguQeIOhid4Nzfmqig2L0v41IoANLcjT.NcOE.', 'user', 9, TRUE),
+('RAVELOMANATSOA', 'Marc', 'marc.ravelomanatsoa@gmail.com', '$2y$10$96ddN6BFFGsPFl1PguQeIOhid4Nzfmqig2L0v41IoANLcjT.NcOE.', 'user', 12, TRUE);
 
 -- ============================================
 -- COUPURES PLANIFIÉES (exemples)
@@ -158,7 +158,7 @@ INSERT INTO ac_signalements (user_id, quartier_id, type_service, type_probleme, 
 -- 2. marie.rasoa@gmail.com (Ankorondrano, TNR)
 -- 3. paul.randria@gmail.com (Behoririka, TNR)
 -- 4. sophie.raharison@gmail.com (Tanambao, TMM)
--- 5. marc.ravelo@gmail.com (Asabotsy, ATB)
+-- 5. marc.ravelomanantsoa@gmail.com (Asabotsy, ATB)
 -- ============================================
 
 -- FIN DU SEED
