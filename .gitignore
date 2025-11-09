@@ -1,0 +1,35 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+logs/
+
+# Uploads (photos signalements)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Configuration locale (chaque dev a la sienne)
+app/Config/config.local.php
+
+# Composer (si utilisé)
+/vendor/
+composer.lock
+
+# Cache
+cache/
+*.cache
+
+# Fichiers temporaires
+tmp/
+temp/
+*.tmp
+*~
