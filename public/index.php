@@ -30,6 +30,13 @@ Session::start();
 $router = new Router();
 $request = new Request();
 
+// DEBUG - Afficher l'URI détectée (RETIRE ÇA APRÈS)
+if (ENVIRONMENT === 'development') {
+    // Décommenter pour voir l'URI
+    // echo "URI détectée: [" . $request->getUriPath() . "]<br>";
+    // echo "Méthode: " . $request->getMethod() . "<br>";
+}
+
 // ============================================
 // DÉFINITION DES ROUTES
 // ============================================

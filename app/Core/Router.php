@@ -125,13 +125,26 @@ class Router
     {
         $method = $request->getMethod();
         $uri = $request->getUriPath();
+        
+        // Normaliser l'URI
+        $uri = rtrim($uri, '/');
+        if ($uri === '') {
+            $uri = '/';
+        }
 
         // Choisir les routes selon la méthode
         $routes = ($method === 'GET') ? $this->getRoutes : $this->postRoutes;
 
         // Chercher une correspondance exacte
-        if (isset($routes[$uri])) {
-            return $this->executeRoute($routes[$uri], $request);
+        foreach ($routes as $pattern => $route) {
+            $normalizedPattern = rtrim($pattern, '/');
+            if ($normalizedPattern === '') {
+                $normalizedPattern = '/';
+            }
+            
+            if ($normalizedPattern === $uri) {
+                return $this->executeRoute($route, $request);
+            }
         }
 
         // Chercher une correspondance avec paramètres (ex: /user/{id})

@@ -49,7 +49,7 @@ define('UPLOAD_PATH', PUBLIC_PATH . '/uploads');
 
 // URL de base de l'application
 // Adapte selon ton installation Laragon
-define('BASE_URL', 'http://alert-coupure.au');
+define('BASE_URL', 'http://localhost/alert-coupure/public');
 
 // URL des assets
 define('ASSETS_URL', BASE_URL . '/assets');

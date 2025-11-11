@@ -64,10 +64,26 @@ class Request
             $uri = substr($uri, 0, $pos);
         }
         
-        // Retirer les slashes en trop
-        $uri = trim($uri, '/');
+        // Retirer le dossier de base si l'app est dans un sous-dossier
+        $scriptName = dirname($_SERVER['SCRIPT_NAME']);
+        if ($scriptName !== '/' && strpos($uri, $scriptName) === 0) {
+            $uri = substr($uri, strlen($scriptName));
+        }
         
-        return '/' . $uri;
+        // Assurer qu'on a au moins /
+        if (empty($uri) || $uri[0] !== '/') {
+            $uri = '/' . $uri;
+        }
+        
+        // Retirer les slashes en fin
+        $uri = rtrim($uri, '/');
+        
+        // Si vide après trim, retourner /
+        if ($uri === '') {
+            $uri = '/';
+        }
+        
+        return $uri;
     }
 
     /**
