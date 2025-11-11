@@ -174,6 +174,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     const villeSelect = document.getElementById('ville_id');
     const quartierSelect = document.getElementById('quartier_id');
+	
+	const baseUrl = '<?= BASE_URL ?>/api/quartiers/';
+	console.log('URL API:', baseUrl + villeId); // DEBUG
+	fetch(baseUrl + villeId)
     
     villeSelect.addEventListener('change', function() {
         const villeId = this.value;
