@@ -41,11 +41,21 @@
                             <i class="bi bi-lightning-charge me-1"></i> Coupures
                         </a>
                     </li>
-                    <li class="nav-item">
+                    
+                    <!-- Notifications signalements -->
+                    <?php 
+                    $signalementModel = new App\Models\Signalement();
+                    $nbSignalementsAttente = $signalementModel->countByStatus('signale');
+                    ?>
+                    <li class="nav-item position-relative">
                         <a class="nav-link <?= is_active('/admin/signalements') ? 'active' : '' ?>" href="<?= url('/admin/signalements') ?>">
                             <i class="bi bi-exclamation-triangle me-1"></i> Signalements
+                            <?php if ($nbSignalementsAttente > 0): ?>
+                                <span class="badge bg-danger rounded-pill ms-1"><?= $nbSignalementsAttente ?></span>
+                            <?php endif; ?>
                         </a>
                     </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link <?= is_active('/admin/users') ? 'active' : '' ?>" href="<?= url('/admin/users') ?>">
                             <i class="bi bi-people me-1"></i> Utilisateurs

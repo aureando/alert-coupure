@@ -146,6 +146,7 @@ class Session
         $_SESSION['user_role'] = $user->role;
         $_SESSION['user_nom'] = $user->nom;
         $_SESSION['user_prenom'] = $user->prenom;
+        $_SESSION['user_quartier_id'] = $user->quartier_id ?? null;
         $_SESSION['logged_in'] = true;
     }
 
@@ -221,6 +222,7 @@ class Session
             'role' => $_SESSION['user_role'] ?? null,
             'nom' => $_SESSION['user_nom'] ?? null,
             'prenom' => $_SESSION['user_prenom'] ?? null,
+            'quartier_id' => $_SESSION['user_quartier_id'] ?? null,
         ];
     }
 

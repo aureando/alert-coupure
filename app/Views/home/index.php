@@ -40,30 +40,42 @@
         Rechercher des coupures
     </h4>
     
-    <form method="GET" action="<?= url('/') ?>" class="row g-3">
-        <div class="col-md-4">
+    <form method="GET" action="<?= url('/') ?>" class="row g-3" id="searchForm">
+        <div class="col-md-3">
             <label for="ville" class="form-label">Ville</label>
             <select class="form-select" id="ville" name="ville">
                 <option value="">-- Toutes les villes --</option>
                 <?php foreach ($villes as $ville): ?>
-                    <option value="<?= $ville->id ?>">
+                    <option value="<?= $ville->id ?>" <?= (isset($villeId) && $villeId == $ville->id) ? 'selected' : '' ?>>
                         <?= e($ville->nom) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
         </div>
         
-        <div class="col-md-4">
-            <label for="type_service" class="form-label">Type de service</label>
-            <select class="form-select" id="type_service" name="type_service">
-                <option value="">-- Tous --</option>
-                <option value="electricite">Électricité</option>
-                <option value="eau">Eau</option>
-                <option value="les_deux">Les deux</option>
+        <div class="col-md-3">
+            <label for="quartier" class="form-label">Quartier</label>
+            <select class="form-select" id="quartier" name="quartier" <?= empty($quartiers) ? 'disabled' : '' ?>>
+                <option value="">-- Tous les quartiers --</option>
+                <?php foreach ($quartiers as $quartier): ?>
+                    <option value="<?= $quartier->id ?>" <?= (isset($quartierId) && $quartierId == $quartier->id) ? 'selected' : '' ?>>
+                        <?= e($quartier->nom) ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
         </div>
         
-        <div class="col-md-4">
+        <div class="col-md-3">
+            <label for="type_service" class="form-label">Type de service</label>
+            <select class="form-select" id="type_service" name="type_service">
+                <option value="">-- Tous --</option>
+                <option value="electricite" <?= (isset($typeService) && $typeService === 'electricite') ? 'selected' : '' ?>>Électricité</option>
+                <option value="eau" <?= (isset($typeService) && $typeService === 'eau') ? 'selected' : '' ?>>Eau</option>
+                <option value="les_deux" <?= (isset($typeService) && $typeService === 'les_deux') ? 'selected' : '' ?>>Les deux</option>
+            </select>
+        </div>
+        
+        <div class="col-md-3">
             <label class="form-label d-block">&nbsp;</label>
             <button type="submit" class="btn btn-primary w-100">
                 <i class="bi bi-search me-2"></i>
@@ -71,6 +83,48 @@
             </button>
         </div>
     </form>
+</div>
+
+<!-- Script pour charger quartiers dynamiquement -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const villeSelect = document.getElementById('ville');
+    const quartierSelect = document.getElementById('quartier');
+    
+    villeSelect.addEventListener('change', function() {
+        const villeId = this.value;
+        
+        if (!villeId) {
+            quartierSelect.innerHTML = '<option value="">-- Tous les quartiers --</option>';
+            quartierSelect.disabled = true;
+            return;
+        }
+        
+        quartierSelect.innerHTML = '<option value="">Chargement...</option>';
+        quartierSelect.disabled = true;
+        
+        fetch('<?= BASE_URL ?>/api/quartiers/' + villeId)
+            .then(response => response.json())
+            .then(data => {
+                quartierSelect.innerHTML = '<option value="">-- Tous les quartiers --</option>';
+                
+                if (data && data.length > 0) {
+                    data.forEach(quartier => {
+                        const option = document.createElement('option');
+                        option.value = quartier.id;
+                        option.textContent = quartier.nom;
+                        quartierSelect.appendChild(option);
+                    });
+                    quartierSelect.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                quartierSelect.innerHTML = '<option value="">Erreur de chargement</option>';
+            });
+    });
+});
+</script>
 </div>
 
 <!-- Section des coupures récentes -->
@@ -114,7 +168,7 @@
                                 </h5>
                                 <p class="text-muted small mb-0">
                                     <i class="bi bi-geo-alt me-1"></i>
-                                    Tous les quartiers
+                                    <?= e(truncate($coupure->quartiers_noms ?? 'Tous les quartiers', 60)) ?>
                                 </p>
                             </div>
                             <div>

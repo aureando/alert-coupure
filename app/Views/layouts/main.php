@@ -52,11 +52,32 @@
                                     <i class="bi bi-grid-3x3-gap me-1"></i> Tableau de bord
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item position-relative">
                                 <a class="nav-link <?= is_active('/signalements') ? 'active' : '' ?>" href="<?= url('/signalements') ?>">
                                     <i class="bi bi-exclamation-triangle me-1"></i> Mes signalements
                                 </a>
                             </li>
+                            
+                            <!-- Notification coupures actives -->
+                            <?php 
+                            $user = auth_user();
+                            if ($user && isset($user['quartier_id'])) {
+                                $coupureModel = new App\Models\Coupure();
+                                $coupuresActives = $coupureModel->getActiveByQuartier($user['quartier_id']);
+                                $nbCoupures = count($coupuresActives);
+                            } else {
+                                $nbCoupures = 0;
+                            }
+                            ?>
+                            <?php if ($nbCoupures > 0): ?>
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning fw-bold" href="<?= url('/dashboard') ?>#coupures">
+                                        <i class="bi bi-bell-fill me-1"></i>
+                                        <span class="badge bg-warning text-dark"><?= $nbCoupures ?></span>
+                                        Coupure<?= $nbCoupures > 1 ? 's' : '' ?> active<?= $nbCoupures > 1 ? 's' : '' ?>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                         <?php endif; ?>
                         
                         <!-- Dropdown utilisateur -->

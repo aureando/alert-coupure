@@ -231,7 +231,12 @@ class Router
         [$controllerName, $method] = explode('@', $handler);
 
         // Construire le namespace complet
-        $controllerClass = "App\\Controllers\\{$controllerName}";
+        // Si le contrôleur contient déjà Admin\ ou autre namespace, on le garde
+        if (strpos($controllerName, '\\') !== false) {
+            $controllerClass = "App\\Controllers\\{$controllerName}";
+        } else {
+            $controllerClass = "App\\Controllers\\{$controllerName}";
+        }
 
         // Vérifier que la classe existe
         if (!class_exists($controllerClass)) {

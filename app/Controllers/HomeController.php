@@ -22,15 +22,37 @@ class HomeController extends BaseController
      */
     public function index(Request $request): void
     {
-        // Récupérer les coupures récentes
-        $coupures = $this->coupureModel->getRecent(10);
+        // Récupérer les filtres
+        $villeId = $request->get('ville');
+        $quartierId = $request->get('quartier');
+        $typeService = $request->get('type_service');
+        
+        // Récupérer les coupures avec filtres
+        if ($villeId || $quartierId || $typeService) {
+            // Recherche filtrée
+            $coupures = $this->coupureModel->search($villeId, $quartierId, $typeService);
+        } else {
+            // Afficher les coupures récentes par défaut
+            $coupures = $this->coupureModel->getRecent(10);
+        }
         
         // Récupérer toutes les villes pour la recherche
         $villes = $this->villeModel->all('nom ASC');
         
+        // Récupérer les quartiers si une ville est sélectionnée
+        $quartiers = [];
+        if ($villeId) {
+            $quartierModel = new \App\Models\Quartier();
+            $quartiers = $quartierModel->getByVille($villeId);
+        }
+        
         $this->view('home/index', [
             'coupures' => $coupures,
-            'villes' => $villes
+            'villes' => $villes,
+            'quartiers' => $quartiers,
+            'villeId' => $villeId,
+            'quartierId' => $quartierId,
+            'typeService' => $typeService
         ]);
     }
 }
