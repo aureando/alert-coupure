@@ -39,8 +39,8 @@ INSERT INTO ac_quartiers (nom, ville_id, latitude, longitude) VALUES
 ('Tanambao II', 2, NULL, NULL),
 ('Bazary Be', 2, NULL, NULL),
 ('Morafeno', 2, NULL, NULL),
-('Anjoma', 2, NULL, NULL);
-('Andranomadio', 2, NULL, NULL);
+('Anjoma', 2, NULL, NULL),
+('Andranomadio', 2, NULL, NULL),
 ('Bazary Kely', 2, NULL, NULL);
 
 -- Antsirabe (ATB)

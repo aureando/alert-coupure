@@ -164,17 +164,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
                                 <h5 class="card-title mb-1 fw-bold">
-                                    <?= e($coupure->ville_nom) ?>
+                                    <?= e($coupure->quartier_nom) ?>  <!-- LE QUARTIER en grand -->
                                 </h5>
                                 <p class="text-muted small mb-0">
                                     <i class="bi bi-geo-alt me-1"></i>
-                                    <?= e(truncate($coupure->quartiers_noms ?? 'Tous les quartiers', 60)) ?>
+                                    <?= e($coupure->ville_nom) ?>  <!-- La ville en petit -->
                                 </p>
                             </div>
                             <div>
                                 <?= service_icon($coupure->type_service) ?>
                             </div>
-                        </div>
+                        </div>  
                         
                         <!-- Dates -->
                         <div class="mb-3">
