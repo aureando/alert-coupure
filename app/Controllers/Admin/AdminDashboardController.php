@@ -49,8 +49,8 @@ class AdminDashboardController extends BaseController
         $signalements = array_slice($signalements, 0, 10); // 10 derniers
         
         // Coupures actives
-        $coupures = $this->coupureModel->getAllWithDetails();
-        $coupures = array_filter($coupures, fn($c) => $c->statut !== 'termine');
+        $allCoupures = $this->coupureModel->getAllWithDetails();
+        $coupures = array_filter($allCoupures, fn($c) => $c->statut !== 'termine');
         $coupures = array_slice($coupures, 0, 10);
         
         $this->view('admin/dashboard', [

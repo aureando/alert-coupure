@@ -8,6 +8,11 @@
 // Démarrer la session
 session_start();
 
+// // DEBUG - À RETIRER APRÈS
+// session_destroy();
+// session_start();
+// // FIN DEBUG
+
 // Charger la configuration
 require_once __DIR__ . '/../app/Config/config.php';
 
